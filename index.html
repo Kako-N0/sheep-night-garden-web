@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ひつじの夜庭 - Sheep Night Garden</title>
+  <meta name="description" content="眠れない夜は、ひつじたちの暮らしを少しだけ眺めていこう。ひつじや素数を数えるリラクゼーションWebアプリ。">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@400;600;800&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div id="app">
+    <!-- HOME SCREEN -->
+    <div id="home-screen" class="screen active">
+      <div class="header">
+        <button id="btn-to-settings" class="icon-button left-btn" aria-label="設定">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+        <button id="btn-to-info" class="icon-button right-btn" aria-label="情報">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-help"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+        </button>
+        <div class="header-sub">Sheep Night Garden</div>
+        <h1 class="header-title">ひつじの夜庭</h1>
+        <p class="header-desc">眠れない夜は、ひつじたちの暮らしを<br>少しだけ眺めていこう。</p>
+      </div>
+
+      <div class="splash-wrapper">
+        <img
+          src="./assets/icon/web_image.png"
+          class="splash-image"
+          alt="Sheep Night Garden"
+        >
+      </div>
+
+      <div class="bottom-msg">今日もここにいて大丈夫。</div>
+
+      <div class="button-group">
+        <button id="btn-toggle-bgm" class="btn bgm-btn">
+          <span class="icon" id="bgm-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-volume-2"><path d="M11 4.702a.7.7 0 0 0-1.203-.49L5.24 8.72a1 1 0 0 1-.64.28H3a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h1.6a1 1 0 0 1 .64.28l4.557 4.507A.7.7 0 0 0 11 19.298z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          </span>
+          <span id="bgm-btn-text">BGMを流す</span>
+        </button>
+
+        <button id="btn-count-sheep" class="btn sheep-btn">
+          <span>🐑 ひつじを数える</span>
+        </button>
+
+        <button id="btn-count-prime" class="btn prime-btn">
+          <span>✨ ひつじと素数を数える</span>
+        </button>
+      </div>
+
+      <div class="stats-card">
+        <div class="stats-text">これまで数えたひつじ：<span id="stat-cumulative">0</span> 匹</div>
+        <div class="stats-text">本日のひつじ：<span id="stat-today">0</span> 匹</div>
+        <div class="stats-text">昨日のひつじ：<span id="stat-yesterday">0</span> 匹</div>
+        <div class="stats-text">これまで <span id="stat-max-prime">0</span> 素数ひつじまで数えました</div>
+      </div>
+    </div>
+
+    <!-- COUNTING MODAL -->
+    <div id="counting-screen" class="screen modal-screen">
+      <div class="modal-bg"></div>
+      
+      <button id="btn-close-counting" class="close-button" aria-label="閉じる">
+        <div class="close-button-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </div>
+      </button>
+
+      <div class="modal-content">
+        <!-- Count Container -->
+        <div id="count-container" class="count-container invisible">
+          <div id="count-display-prime" class="count-display-prime hidden">
+            <span id="count-number-prime" class="count-number">0</span>
+            <div class="count-unit">素数ひつじ</div>
+          </div>
+          <div id="count-display-sheep" class="count-display-sheep">
+            <span class="count-unit-small">ひつじが</span>
+            <span id="count-number-sheep" class="count-number">0</span>
+            <span class="count-unit-small">匹</span>
+          </div>
+        </div>
+
+        <!-- Bounce Image Container -->
+        <div class="paused-image-container">
+          <div id="bouncing-sheep" class="bouncing-sheep-wrapper">
+            <img id="bouncing-sheep-img" src="./assets/sheep/walk_right.png" class="paused-sheep-image" alt="ひつじ">
+          </div>
+        </div>
+
+        <!-- Pause Menu -->
+        <div id="pause-menu" class="pause-menu hidden">
+          <p id="pause-text" class="pause-text">ひつじが 10 匹になりました。</p>
+          <button id="btn-continue-counting" class="continue-button">
+            <span>続ける</span>
+          </button>
+        </div>
+
+        <div id="counting-hint" class="counting-hint">ゆっくり、ひつじを数えましょう...</div>
+      </div>
+    </div>
+
+    <!-- SETTINGS SCREEN -->
+    <div id="settings-screen" class="screen">
+      <div class="screen-bg"></div>
+      <div class="safe-area">
+        <div class="screen-header">
+          <button class="back-button btn-back">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+            <span class="back-text">戻る</span>
+          </button>
+          <h2 class="screen-title">設定</h2>
+        </div>
+
+        <div class="screen-content">
+          <!-- BGM Setting -->
+          <div class="settings-section">
+            <h3 class="section-title">BGM設定</h3>
+            <div class="bgm-list">
+              <button class="bgm-option" data-track="vibraphone">
+                <span class="bgm-label">ビブラフォン</span>
+                <span class="check-dot"></span>
+              </button>
+              <button class="bgm-option" data-track="campfire">
+                <span class="bgm-label">焚き火</span>
+                <span class="check-dot"></span>
+              </button>
+              <button class="bgm-option" data-track="rain">
+                <span class="bgm-label">雨音</span>
+                <span class="check-dot"></span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Credits Button -->
+          <button id="btn-to-credits" class="navigation-card">
+            <span class="navigation-text">Credits</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+
+
+        </div>
+      </div>
+    </div>
+
+    <!-- INFO SCREEN -->
+    <div id="info-screen" class="screen">
+      <div class="screen-bg"></div>
+      <div class="safe-area">
+        <div class="screen-header">
+          <button class="back-button btn-back">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+            <span class="back-text">戻る</span>
+          </button>
+          <h2 class="screen-title">Info</h2>
+        </div>
+
+        <div class="screen-content">
+          <div class="info-card">
+            <h3 class="info-section-title">アプリ概要</h3>
+            <p class="info-text">眠れない夜に、ひつじたちの静かな暮らしを眺めたり、ひつじを数えたりするアプリです。</p>
+
+            <h3 class="info-section-title">使い方</h3>
+            <p class="info-text">
+              ・BGMを選んで夜の空気を楽しめます<br>
+              ・ひつじや素数をゆっくり数えることができます<br>
+              ・本日または昨日の、数えたひつじの記録も残ります
+            </p>
+
+            <h3 class="info-section-title">リリース情報</h3>
+            <p class="info-text">
+              v1.0.0 (Web Edition)<br>
+              ・ひつじカウント機能追加<br>
+              ・BGM切り替え追加
+            </p>
+          </div>
+          
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CREDITS SCREEN -->
+    <div id="credits-screen" class="screen">
+      <div class="screen-bg"></div>
+      <div class="safe-area">
+        <div class="screen-header">
+          <button class="back-button btn-back">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+            <span class="back-text">戻る</span>
+          </button>
+          <h2 class="screen-title">Credits</h2>
+        </div>
+
+        <div class="screen-content">
+          <div class="credits-card">
+            <div class="credits-section">
+              <div class="credits-label">Music</div>
+              <p class="credits-desc">アプリ内BGMには、素敵なフリーBGM・環境音を使用させていただいております。</p>
+              
+              <div class="credits-item-group">
+                <div class="credits-item">
+                  <div class="credits-item-title">ビブラフォン</div>
+                  <div class="credits-item-value">DOVA-SYNDROME「雨の館Ⅲ」/ のる 様</div>
+                </div>
+                <div class="credits-item">
+                  <div class="credits-item-title">焚き火</div>
+                  <div class="credits-item-value">Springin’ Sound Stock「焚き火 長」</div>
+                </div>
+                <div class="credits-item">
+                  <div class="credits-item-title">雨音</div>
+                  <div class="credits-item-value">DOVA-SYNDROME「雨模様」/ 稿屋 隆 様</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="credits-divider"></div>
+
+            <div class="credits-section">
+              <div class="credits-label">Illustration</div>
+              <p class="credits-desc">アプリ内のイラストにはAI生成画像を使用しております。</p>
+            </div>
+
+            <div class="credits-divider"></div>
+
+            <div class="credits-section">
+              <div class="credits-label">Privacy Policy</div>
+              <p class="credits-desc">
+                「ひつじの夜庭」（以下、「本アプリ」）では、ユーザーの個人情報を収集・保存・共有することはありません。<br>
+                本アプリは、端末内でのみ動作し、外部サーバーへの個人データ送信は行っておりません。<br>
+                なお、将来的に機能追加等によりプライバシーポリシーを変更する場合があります。
+              </p>
+            </div>
+
+            <div class="credits-divider"></div>
+            
+            <div class="credits-section">
+              <p class="credits-desc">© 2026 Nozomi Kako</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Audio Elements -->
+  <audio id="audio-vibraphone" src="./assets/audio/vibraphone.mp3" loop prefetch="auto"></audio>
+  <audio id="audio-campfire" src="./assets/audio/campfire.mp3" loop prefetch="auto"></audio>
+  <audio id="audio-rain" src="./assets/audio/rain.mp3" loop prefetch="auto"></audio>
+
+  <script src="app.js"></script>
+</body>
+</html>

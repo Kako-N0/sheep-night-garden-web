@@ -1,0 +1,13 @@
+{
+  "name": "sheep-night-garden",
+  "version": "1.0.0",
+  "description": "ひつじの夜庭 - Web Edition",
+  "scripts": {
+    "start": "http-server",
+    "dev": "http-server"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "private": true
+}
